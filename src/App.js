@@ -1,8 +1,8 @@
 import React,{ useState,useEffect } from 'react';
 import Header from './component/Header';
+import Footer from './component/Footer';
 import Task from './component/Task';
 import AddTask from './component/AddTask';
-
 const App = () => {
   const [task,setTask] = useState([]);
   const [addTaskComp,setAddTaskComp] = useState(false)
@@ -71,6 +71,7 @@ const App = () => {
       {addTaskComp ? <AddTask addTask={addTask} />:""}
       {task.length > 0 ? <Task task={task} removeTask={removeTask} toggleReminder={toggleReminder} />:
       'NO PENDING TASK'}
+      <Footer/>
     </div>
   )
 }
