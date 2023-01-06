@@ -1,9 +1,9 @@
-import React from 'react'
+
 
 const Footer = () => {
   return (
-    <footer>
-        <p>Copyright &copy; 2022</p>
+    <footer className='mx-auto flex flex-col justify-center items-center'>
+        <p>Copyright &copy; 2023</p>
         <a href='/about'>About</a>
     </footer>
   )

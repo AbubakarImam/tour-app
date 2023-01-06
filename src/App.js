@@ -1,64 +1,65 @@
-import React,{ useState,useEffect } from 'react';
+import React,{ useState} from 'react';
 import Header from './component/Header';
 import Footer from './component/Footer';
 import Task from './component/Task';
 import AddTask from './component/AddTask';
+import Data from './component/data';
 const App = () => {
-  const [task,setTask] = useState([]);
+  const [task,setTask] = useState(Data);
   const [addTaskComp,setAddTaskComp] = useState(false)
-  useEffect(()=>{
-    fetchTask()
-  },[])
-  // Fetch Tasks
-  const fetchTask = async()=>{
-    const res = await fetch('http://localhost:5000/data');
-    const data = await res.json();
-    setTask(data)
-  }
+  // useEffect(()=>{
+  //   fetchTask()
+  // },[])
+  // // Fetch Tasks
+  // const fetchTask = async()=>{
+  //   const res = await fetch('https://abubakarimam.github.io/json.server/db.json/data');
+  //   const data = await res.json();
+  //   setTask(data)
+  // }
   // Fetch A Single Task
-  const fetchATask = async(id)=>{
-    const res = await fetch(`http://localhost:5000/data/${id}`);
-    const data = await res.json();
-    return data
-  }
+  // const fetchATask = async(id)=>{
+  //   const res = await fetch(`https://abubakarimam.github.io/json.server/db.json/data/${id}`);
+  //   const data = await res.json();
+  //   return data
+  // }
   //Remove Task
-  const removeTask = async (id) => {
-    await fetch(`http://localhost:5000/data/${id}`,{
-      method: 'DELETE',
-    })
+  const removeTask =  (id) => {
+    // await fetch(`https://abubakarimam.github.io/json.server/db.json/data/${id}`,{
+    //   method: 'DELETE',
+    // })
     setTask(task.filter((tasks)=>tasks.id !== id))
   }
 
   // Toggle Reminder
-  const toggleReminder = async (id) => {
-    const dataToToggle = await fetchATask(id);
-    const updTask = {...dataToToggle,reminder: !dataToToggle.reminder};
-    const res = await fetch(`http://localhost:5000/data/${id}`,{
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(updTask)
-    })
-    const data = await res.json()
+  const toggleReminder = (id) => {
+    // const dataToToggle = await fetchATask(id);
+    // const updTask = {...dataToToggle,reminder: !dataToToggle.reminder};
+    // const res = await fetch(`https://abubakarimam.github.io/json.server/db.json/data/${id}`,{
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(updTask)
+    // })
+    // const data = await res.json()
     setTask(
       task.map((tasks)=> tasks.id === id? 
-      {...tasks, reminder:data.reminder}:tasks))
+      {...tasks, reminder:!tasks.reminder}:tasks))
   }
   // Add Task
-  const addTask = async (tasks)=> {
-    const res = await fetch('http://localhost:5000/data', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(tasks)
-    })
-    const data = await res.json();
-    setTask([...task,data])
-    // const id = Math.floor(Math.random * 100) +1;
-    // const newTask = {id,...tasks};
-    // setTask([...task,newTask])
+  const addTask =  (tasks)=> {
+    // const res = await fetch('https://abubakarimam.github.io/json.server/db.json/data', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(tasks)
+    // })
+    // const data = await res.json();
+    // setTask([...task,data])
+     const id = Math.floor(Math.random * 100) +1;
+    const newTask = {id,...tasks};
+    setTask([...task,newTask])
   }
   // Add task form
   const toggleAddTask = ()=> {
