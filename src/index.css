@@ -16,3 +16,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.img-container:hover span {
+  opacity: 1;
+}
+a {
+  transition: all 0.3s linear;
+}
+.carousel-item {
+  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
